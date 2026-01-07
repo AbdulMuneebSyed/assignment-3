@@ -24,3 +24,25 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/* Neobrutalist + rounded corners + old paper aesthetics */
+@layer base {
+  .bg-paper {
+    /* Paper texture with subtle noise */
+    background-image: url('/textures/paper.png'),
+      radial-gradient(100% 100% at 50% 0%, #fdf9f3 0%, #f7eee2 100%);
+    background-blend-mode: multiply;
+  }
+  .text-ink { color: #1a1a1a; }
+  .border-ink { border-color: #1a1a1a; }
+  .bg-card { background-color: #fffaf1; }
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 px-4 py-2 rounded-xl border-4 border-ink bg-card text-ink font-semibold shadow-[6px_6px_0_0_#1a1a1a] hover:translate-y-0.5 hover:shadow-[5px_5px_0_0_#1a1a1a] active:translate-y-1 active:shadow-[3px_3px_0_0_#1a1a1a] transition;
+  }
+  .card {
+    @apply rounded-2xl border-4 border-ink bg-card p-4 shadow-[8px_8px_0_0_#1a1a1a];
+  }
+  .skeleton {
+    @apply rounded-xl border-4 border-dashed border-ink animate-pulse bg-[#f3eee7];
+  }
+}
