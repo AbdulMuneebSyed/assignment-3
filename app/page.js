@@ -38,7 +38,7 @@ export default function Home() {
     return () => clearTimeout(t);
   }, [q]);
 
-  const { data, isLoading, isError, isFetching } = useQuery({
+  const { data, isLoading, isError } = useQuery({
     queryKey: ["events", searchTerm, page],
     queryFn: async () => {
       const res = await fetch(
@@ -102,7 +102,7 @@ export default function Home() {
 
   return (
     <div className="space-y-12">
-      <section className="relative bg-paper border-[6px] border-black rounded-[24px] p-6 sm:p-10 neo-shadow-hard overflow-hidden">
+      <section className="relative bg-[var(--accent-1)] border-[6px] border-black rounded-[24px] p-6 sm:p-10 neo-shadow-hard overflow-hidden">
         {/* CHAOS ACCENTS LAYER */}
         <div className="absolute inset-0 pointer-events-none z-0">
           {/* big slabs */}
@@ -116,13 +116,13 @@ export default function Home() {
           {/* thin brutal bars */}
           <div className="absolute top-1/2 left-1/2 -translate-x-1/4 h-32 w-32 bg-amber-400 border-4 border-black rotate-12 opacity-90" />
           {/* dotted texture */}
-          <div
+          {/* <div
             className="absolute inset-0 opacity-[0.04]"
             style={{
               backgroundImage: "radial-gradient(#000 1px, transparent 1px)",
               backgroundSize: "12px 12px",
             }}
-          />
+          /> */}
         </div>
 
         {/* CONTENT */}
@@ -292,7 +292,7 @@ export default function Home() {
               Quick create
             </Link>
           </div>
-          {isLoading || isFetching ? (
+          {isLoading ? (
             <div className="grid gap-4 sm:grid-cols-2">
               {Array.from({ length: 4 }).map((_, i) => (
                 <SkeletonEventCard key={i} />
