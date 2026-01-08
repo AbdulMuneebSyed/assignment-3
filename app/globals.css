@@ -1,8 +1,8 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #fff8ef;
+  --foreground: #0c0c18;
 }
 
 @theme inline {
@@ -12,37 +12,160 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
 body {
-  background: var(--background);
+  background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 32px,
+      rgba(12, 12, 24, 0.04) 32px,
+      rgba(12, 12, 24, 0.04) 36px
+    ),
+    radial-gradient(
+      circle at 18% 18%,
+      rgba(0, 194, 255, 0.16) 0%,
+      transparent 26%
+    ),
+    radial-gradient(
+      circle at 82% 8%,
+      rgba(255, 90, 95, 0.18) 0%,
+      transparent 22%
+    ),
+    linear-gradient(145deg, #fffaf2 0%, #fff1dd 40%, #fff8ef 100%);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-geist-sans), system-ui, -apple-system,
+    BlinkMacSystemFont, "Segoe UI", sans-serif;
+  min-height: 100vh;
 }
 
-/* Neobrutalist + rounded corners + old paper aesthetics */
+/* Neo-brutalist + playful offset shadows */
 @layer base {
+  :root {
+    --ink: #0c0c18;
+    --muted: #3b3d52;
+    --paper: #fff8ef;
+    --paper-2: #ffeeda;
+    --paper-3: #ffe4c7;
+    --accent: #ff5a5f;
+    --accent-2: #00c2ff;
+    --accent-3: #ffd166;
+    --accent-4: #9b6bff;
+    --border: #0c0c18;
+    --radius: 18px;
+  }
+
   .bg-paper {
-    /* Paper texture with subtle noise */
-    background-image: url('/textures/paper.png'),
-      radial-gradient(100% 100% at 50% 0%, #fdf9f3 0%, #f7eee2 100%);
+    background-image: url("/textures/paper.png"),
+      radial-gradient(
+        100% 100% at 50% 0%,
+        rgba(0, 194, 255, 0.16) 0%,
+        transparent 70%
+      ),
+      radial-gradient(
+        80% 120% at 15% 20%,
+        rgba(255, 90, 95, 0.12),
+        transparent 70%
+      ),
+      var(--paper);
     background-blend-mode: multiply;
   }
-  .text-ink { color: #1a1a1a; }
-  .border-ink { border-color: #1a1a1a; }
-  .bg-card { background-color: #fffaf1; }
-  .btn {
-    @apply inline-flex items-center justify-center gap-2 px-4 py-2 rounded-xl border-4 border-ink bg-card text-ink font-semibold shadow-[6px_6px_0_0_#1a1a1a] hover:translate-y-0.5 hover:shadow-[5px_5px_0_0_#1a1a1a] active:translate-y-1 active:shadow-[3px_3px_0_0_#1a1a1a] transition;
+
+  .text-ink {
+    color: var(--ink);
   }
-  .card {
-    @apply rounded-2xl border-4 border-ink bg-card p-4 shadow-[8px_8px_0_0_#1a1a1a];
+
+  .muted {
+    color: var(--muted);
   }
+
   .skeleton {
-    @apply rounded-xl border-4 border-dashed border-ink animate-pulse bg-[#f3eee7];
+    @apply rounded-xl border-2 border-dashed animate-pulse;
+    border-color: var(--border);
+    background-color: var(--paper-2);
+    box-shadow: 3px 3px 0 0 var(--border);
+  }
+
+  /* Neo-brutalist components */
+  .neo-btn {
+    @apply inline-flex items-center justify-center gap-2 px-4 py-2 rounded-xl font-semibold transition;
+    border: 2px solid var(--border);
+    background: var(--paper);
+    color: var(--ink);
+    box-shadow: 3px 3px 0 0 var(--border);
+    cursor: pointer;
+  }
+  .neo-btn:hover {
+    transform: translate(-1px, -1px);
+    box-shadow: 5px 5px 0 0 var(--border);
+  }
+  .neo-btn:active {
+    transform: translate(2px, 2px);
+    box-shadow: 1px 1px 0 0 var(--border);
+  }
+  .neo-btn--primary {
+    background: linear-gradient(120deg, var(--accent-3), var(--accent));
+    color: var(--ink);
+  }
+  .neo-btn--danger {
+    background: var(--accent);
+    color: #fff;
+  }
+  .neo-card {
+    @apply rounded-3xl p-5 border-3;
+    border-color: var(--border);
+    background: var(--paper);
+    box-shadow: 6px 6px 0 0 var(--border);
+  }
+  .neo-input {
+    @apply w-full rounded-2xl px-3 py-2 text-base border-3 transition;
+    border-color: var(--border);
+    background: #fff;
+    color: var(--ink);
+  }
+  .neo-input:focus {
+    outline: none;
+    box-shadow: 3px 3px 0 0 var(--border);
+    border-color: var(--ink);
+  }
+  .neo-textarea {
+    @apply w-full rounded-2xl px-3 py-2 text-base border-3 transition;
+    border-color: var(--border);
+    background: #fff;
+    color: var(--ink);
+  }
+  .neo-textarea:focus {
+    outline: none;
+    box-shadow: 3px 3px 0 0 var(--border);
+    border-color: var(--ink);
+  }
+  .neo-badge {
+    @apply inline-flex items-center rounded-xl px-3 py-1 text-xs font-black tracking-wide border-3 uppercase;
+    border-color: var(--border);
+    background: var(--accent-3);
+    color: var(--ink);
+    box-shadow: 2px 2px 0 0 var(--border);
+    cursor: pointer;
+  }
+  .neo-shadow {
+    box-shadow: 6px 6px 0 0 var(--border);
+  }
+  .neo-divider {
+    @apply border-t-2 my-4;
+    border-color: var(--border);
+  }
+  .neo-capacity {
+    @apply w-full h-4 rounded-xl overflow-hidden border-3;
+    border-color: var(--border);
+    background: var(--paper-3);
+    box-shadow: 2px 2px 0 0 var(--border);
+  }
+  .neo-capacity-fill {
+    height: 100%;
+    background: repeating-linear-gradient(
+      45deg,
+      var(--accent),
+      var(--accent) 12px,
+      var(--accent-2) 12px,
+      var(--accent-2) 24px
+    );
   }
 }

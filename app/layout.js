@@ -1,6 +1,7 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Providers from "./providers";
+import NavBar from "@/components/layout/NavBar";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -20,21 +21,12 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased bg-paper text-ink`}>
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-paper text-ink`}
+      >
         <Providers>
-          <header className="border-b-4 border-ink/60 bg-card/70 backdrop-blur sticky top-0 z-50">
-            <div className="max-w-5xl mx-auto px-4 py-3 flex items-center justify-between">
-              <a href="/" className="font-black text-xl tracking-tight">MeraEvent</a>
-              <nav className="flex gap-3">
-                <a className="btn" href="/events">Events</a>
-                <a className="btn" href="/events/new">Create Event</a>
-                <a className="btn" href="/login">Login</a>
-              </nav>
-            </div>
-          </header>
-          <main className="max-w-5xl mx-auto px-4 py-6">
-            {children}
-          </main>
+          <NavBar />
+          <main className="max-w-6xl mx-auto px-4 py-6">{children}</main>
         </Providers>
       </body>
     </html>
